@@ -1,0 +1,74 @@
+# =========================
+# Node.js (Frontend + Backend)
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# Build outputs
+dist/
+build/
+
+# Vite cache
+.vite/
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# =========================
+# Python (ML Models / Flask)
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# =========================
+# ML model files (optional large files)
+# =========================
+*.h5
+*.pkl
+*.joblib
+*.pt
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# Uploads folder (if using multer)
+# =========================
+uploads/
+
+# =========================
+# Coverage / test
+# =========================
+coverage/
+
+# =========================
+# Mac / Windows junk
+# =========================
+Desktop.ini
