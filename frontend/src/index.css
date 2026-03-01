@@ -70,3 +70,10 @@ button {
   background:#0f5132;
   color:white;
 }
+
+.input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
