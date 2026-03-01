@@ -1,30 +1,25 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
+import cors from "cors"; 
 import connectDB from "./config/mongodb.js";
-
 import authRoute from "./routes/authRoute.js";
-import cropRoute from "./routes/cropRoute.js";
-import diseaseRoute from "./routes/diseaseRoute.js";
-import deficiencyRoute from "./routes/deficiencyRoute.js";
-import weatherRoute from "./routes/weatherRoute.js";
-import decisionRoute from "./routes/decisionRoute.js";
 
 dotenv.config();
 connectDB();
 
 const app = express();
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
-app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static("uploads"));
+app.use(express.urlencoded({ extended: true }));
 
+// routes
 app.use("/api/auth", authRoute);
-app.use("/api/crop", cropRoute);
-app.use("/api/disease", diseaseRoute);
-app.use("/api/deficiency", deficiencyRoute);
-app.use("/api/weather", weatherRoute);
-app.use("/api/decision", decisionRoute);
 
 const PORT = process.env.PORT || 5000;
 
