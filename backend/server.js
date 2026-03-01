@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./config/mongodb.js";
 import authRoute from "./routes/authRoute.js";
 import cropRoutes from "./routes/cropRoute.js";
+import diseaseRoutes from "./routes/diseaseRoute.js";
 
 
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/crop", cropRoutes);
+app.use("/api/disease", diseaseRoutes);
 
 // routes
 app.use("/api/auth", authRoute);

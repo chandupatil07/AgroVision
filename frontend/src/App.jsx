@@ -8,6 +8,7 @@ import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
 import Weather from "./pages/Weather";
 import CropPrediction from "./pages/CropPrediction";
+import DiseaseDetection from "./pages/DiseaseDetection";
 
 <Route path="/weather" element={<Weather />} />
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/crop-prediction" element={<CropPrediction />} />
+       <Route path="/disease-detection" element={<DiseaseDetection />} />
       </Routes>
     </div>
   );

@@ -1,86 +1,92 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function CropPrediction() {
-  const [formData, setFormData] = useState({
-    nitrogen: "",
-    phosphorus: "",
-    potassium: "",
-    temperature: "",
-    humidity: "",
-    ph: "",
-    rainfall: "",
-  });
-
+  const [location, setLocation] = useState(null);
+  const [weather, setWeather] = useState(null);
   const [result, setResult] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [advice, setAdvice] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
+          fetchPrediction(lat, lon);
+        },
+        () => alert("Location permission denied")
+      );
+    }
   };
 
-  const predictCrop = async () => {
+  const fetchPrediction = async (lat, lon) => {
     try {
-      setLoading(true);
+      const res = await axios.post("http://localhost:5000/api/crop/auto-predict", {
+        lat,
+        lon,
+      });
 
-const res = await axios.post(
-  "http://localhost:5000/api/crop/recommend",
-  formData
-);
-
-     setResult(res.data.recommendedCrop);
+      setWeather(res.data.weather);
+      setResult(res.data.crop);
+      setAdvice(res.data.advice);
       setLoading(false);
     } catch (error) {
-      alert("Prediction failed!");
+      alert("Prediction failed");
       setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl font-bold">
+        🌍 Detecting location & analyzing farm data...
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-100 p-6">
 
       <h1 className="text-3xl font-bold text-center text-green-700 mb-6">
-        🌾 Crop Prediction System
+        🌾 Smart Crop Prediction (Auto Mode)
       </h1>
 
-      {/* Form */}
-      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6">
+      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6 space-y-6">
 
-        <h2 className="text-xl font-semibold mb-4 text-gray-700">
-          Enter Soil & Climate Details
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-          <input type="number" name="nitrogen" placeholder="Nitrogen (N)" className="input" onChange={handleChange} />
-          <input type="number" name="phosphorus" placeholder="Phosphorus (P)" className="input" onChange={handleChange} />
-          <input type="number" name="potassium" placeholder="Potassium (K)" className="input" onChange={handleChange} />
-
-          <input type="number" name="temperature" placeholder="Temperature (°C)" className="input" onChange={handleChange} />
-          <input type="number" name="humidity" placeholder="Humidity (%)" className="input" onChange={handleChange} />
-          <input type="number" name="ph" placeholder="Soil pH" className="input" onChange={handleChange} />
-
-          <input type="number" name="rainfall" placeholder="Rainfall (mm)" className="input" onChange={handleChange} />
+        {/* Weather Info */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+          <div className="p-4 bg-blue-100 rounded-lg">
+            🌡 Temp: {weather.temp} °C
+          </div>
+          <div className="p-4 bg-green-100 rounded-lg">
+            💧 Humidity: {weather.humidity} %
+          </div>
+          <div className="p-4 bg-yellow-100 rounded-lg">
+            ☔ Rainfall: {weather.rainfall} mm
+          </div>
         </div>
 
-        <button
-          onClick={predictCrop}
-          className="mt-6 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
-        >
-          {loading ? "Predicting..." : "Predict Crop"}
-        </button>
+        {/* Crop Result */}
+        <div className="bg-green-100 border-l-4 border-green-600 p-4 rounded">
+          <h2 className="text-xl font-bold text-green-700">
+            ✅ Recommended Crop
+          </h2>
+          <p className="text-2xl mt-2">🌱 {result}</p>
+        </div>
 
-        {/* Result */}
-        {result && (
-          <div className="mt-6 bg-green-100 border-l-4 border-green-600 p-4 rounded">
-            <h3 className="text-lg font-bold text-green-700">
-              ✅ Best Crop Recommendation
-            </h3>
-            <p className="text-xl mt-2 text-gray-800">
-              🌱 {result}
-            </p>
-          </div>
-        )}
+        {/* Smart Advice */}
+        <div className="bg-orange-100 border-l-4 border-orange-500 p-4 rounded">
+          <h2 className="text-xl font-bold text-orange-700">
+            🧠 Smart Farming Advice
+          </h2>
+          <p className="mt-2">{advice}</p>
+        </div>
 
       </div>
     </div>
