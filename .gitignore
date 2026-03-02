@@ -6,12 +6,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment files
-.env
-.env.local
-.env.development
-.env.production
-
 # Build outputs
 dist/
 build/
@@ -23,12 +17,23 @@ build/
 logs/
 *.log
 
-# OS files
-.DS_Store
-Thumbs.db
+# =========================
+# Environment files (Secrets)
+# =========================
+.env
+.env.local
+.env.development
+.env.production
 
 # =========================
-# Python (ML Models / Flask)
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# =========================
+# Python (ML Models)
 # =========================
 __pycache__/
 *.pyc
@@ -37,7 +42,7 @@ __pycache__/
 *.db
 *.sqlite3
 
-# Virtual environment
+# Virtual environments
 venv/
 env/
 .venv/
@@ -46,12 +51,25 @@ env/
 .ipynb_checkpoints/
 
 # =========================
-# ML model files (optional large files)
+# ML Model Large Files (DO NOT PUSH)
 # =========================
 *.h5
 *.pkl
 *.joblib
 *.pt
+*.onnx
+
+# =========================
+# Dataset files (DO NOT PUSH)
+# =========================
+*.csv
+*.tsv
+*.xlsx
+
+# =========================
+# Uploads folder (multer / images)
+# =========================
+uploads/
 
 # =========================
 # VS Code
@@ -59,16 +77,30 @@ env/
 .vscode/
 
 # =========================
-# Uploads folder (if using multer)
-# =========================
-uploads/
-
-# =========================
 # Coverage / test
 # =========================
 coverage/
 
 # =========================
-# Mac / Windows junk
+# Python cache inside ml_models
 # =========================
-Desktop.ini
+ml_models/__pycache__/
+ml_models/model/__pycache__/
+ml_models/utils/__pycache__/
+
+# =========================
+# Ignore trained model directory completely (optional but recommended)
+# =========================
+ml_models/model/*.pkl
+ml_models/model/*.h5
+
+# =========================
+# Ignore dataset folder completely (optional)
+# =========================
+ml_models/dataset/
+
+# =========================
+# React cache
+# =========================
+frontend/node_modules/
+backend/node_modules/

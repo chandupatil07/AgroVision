@@ -1,44 +1,35 @@
-// Crop Recommendation Controller
+import axios from "axios";
+import { getWeather } from "../services/weatherService.js";
 
-export const recommendCrop = async (req, res) => {
+export const predictCrop = async (req, res) => {
   try {
-    const {
-      nitrogen,
-      phosphorus,
-      potassium,
-      temperature,
-      humidity,
-      ph,
-      rainfall
-    } = req.body;
+    const { lat, lon } = req.body;
 
-    // Validation
-    if (
-      !nitrogen || !phosphorus || !potassium ||
-      !temperature || !humidity || !ph || !rainfall
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "All soil and weather fields are required"
-      });
-    }
+    const weather = await getWeather(lat, lon);
 
-    // TEMP logic (later connect ML API)
-    let crop = "Rice";
+    console.log(weather);//added newly to debug
+    // Dummy soil values
+    const soil = {
+      N: 90,
+      P: 40,
+      K: 40,
+      ph: 6.5,
+      rainfall: 200,
+    };
 
-    if (ph > 6 && rainfall < 100) crop = "Wheat";
-    if (temperature > 30) crop = "Cotton";
-
-    res.status(200).json({
-      success: true,
-      recommendedCrop: crop
+    const ml = await axios.post("http://127.0.0.1:8000/predict", {
+      ...soil,
+      temperature: weather.temperature,
+      humidity: weather.humidity,
     });
 
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Crop recommendation failed",
-      error: error.message
+    res.json({
+      crop: ml.data.crop,
+      reason: ml.data.reason,
+      weather,
     });
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ error: "Prediction failed" });
   }
 };

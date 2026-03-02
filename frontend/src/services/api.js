@@ -9,6 +9,7 @@ const API = axios.create({
 export const registerUser = (data) => API.post("/auth/register", data);
 // Login API
 export const loginUser = (formData) => API.post("/auth/login", formData);
+export const predictCrop = (data) => API.post("/crop/predict", data);
 
 
 export default API;
