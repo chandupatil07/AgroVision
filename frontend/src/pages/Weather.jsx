@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import weatherBg from "../assets/weather_pred_page.jpg";
 
 function Weather() {
   const [city, setCity] = useState("");
@@ -99,56 +100,74 @@ function Weather() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-100 p-6">
-      <h1 className="text-3xl font-bold text-center text-green-700 mb-6">
-        🌤️ Weather & Farming Advisory
-      </h1>
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
+      style={{ backgroundImage: `url(${weatherBg})` }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-      {/* Search */}
-      <div className="flex justify-center gap-4 mb-6">
-        <input
-          type="text"
-          placeholder="Enter city name"
-          className="p-3 rounded-lg border w-64"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
+      <div className="relative z-10 w-full max-w-4xl text-center">
+        <h1 className="text-4xl font-bold text-white mb-8 drop-shadow-lg">
+          🌤️ Weather & Farming Advisory
+        </h1>
 
-        <button
-          onClick={getWeather}
-          className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700"
-        >
-          {loading ? "Loading..." : "Get Weather"}
-        </button>
+        {/* Search Section */}
+        <div className="bg-white bg-opacity-90 backdrop-blur-md p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
+          <input
+            type="text"
+            placeholder="Enter city name"
+            className="p-3 rounded-lg border w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-green-500"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
 
-        <button
-          onClick={useMyFarmLocation}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
-        >
-          📍 Use My Farm Location
-        </button>
-      </div>
+          <button
+            onClick={getWeather}
+            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300 w-full md:w-auto"
+          >
+            {loading ? "Loading..." : "Get Weather"}
+          </button>
 
-      {/* Weather Display */}
-      {weather && (
-        <div className="max-w-xl mx-auto bg-white shadow-xl rounded-xl p-6 space-y-4">
-          <h2 className="text-2xl font-bold text-center text-blue-600">
-            📍 {weather.name}
-          </h2>
-
-          <div className="grid grid-cols-2 gap-4 text-gray-700">
-            <p>🌡️ Temperature: {weather.main.temp} °C</p>
-            <p>💧 Humidity: {weather.main.humidity} %</p>
-            <p>🌬️ Wind Speed: {weather.wind.speed} m/s</p>
-            <p>☁️ Condition: {weather.weather[0].main}</p>
-          </div>
-
-          <div className="bg-green-100 border-l-4 border-green-600 p-4 rounded">
-            <h3 className="font-bold text-green-700">🌱 Farming Advice</h3>
-            <p className="mt-2 text-gray-700">{advice}</p>
-          </div>
+          <button
+            onClick={useMyFarmLocation}
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 w-full md:w-auto"
+          >
+            📍 Use My Farm Location
+          </button>
         </div>
-      )}
+
+        {/* Weather Display */}
+        {weather && (
+          <div className="bg-white bg-opacity-95 rounded-2xl shadow-2xl p-8 text-left space-y-6 animate-fade-in">
+            <h2 className="text-3xl font-bold text-center text-blue-600">
+              📍 {weather.name}
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700 text-lg">
+              <p className="bg-blue-50 p-4 rounded-lg shadow">
+                🌡️ Temperature: <span className="font-semibold">{weather.main.temp} °C</span>
+              </p>
+              <p className="bg-green-50 p-4 rounded-lg shadow">
+                💧 Humidity: <span className="font-semibold">{weather.main.humidity} %</span>
+              </p>
+              <p className="bg-yellow-50 p-4 rounded-lg shadow">
+                🌬️ Wind Speed: <span className="font-semibold">{weather.wind.speed} m/s</span>
+              </p>
+              <p className="bg-purple-50 p-4 rounded-lg shadow">
+                ☁️ Condition: <span className="font-semibold">{weather.weather[0].main}</span>
+              </p>
+            </div>
+
+            <div className="bg-green-100 border-l-4 border-green-600 p-6 rounded-lg shadow">
+              <h3 className="font-bold text-green-700 text-xl">
+                🌱 Farming Advice
+              </h3>
+              <p className="mt-3 text-gray-700 text-lg">{advice}</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

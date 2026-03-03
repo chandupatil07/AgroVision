@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Weather from "./pages/Weather";
 import CropPrediction from "./pages/CropPrediction";
 import DiseaseDetection from "./pages/DiseaseDetection";
+import Chatbot from "./components/Chatbot";
 
 <Route path="/weather" element={<Weather />} />
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/weather" element={<Weather />} />
         <Route path="/crop-prediction" element={<CropPrediction />} />
        <Route path="/disease-detection" element={<DiseaseDetection />} />
+        <Route path="/chatbot" element={<Chatbot />} />
       </Routes>
     </div>
   );

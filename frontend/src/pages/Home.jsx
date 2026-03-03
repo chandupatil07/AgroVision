@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import cropImg from "../assets/crop_prediction.jpg";
+import diseaseImg from "../assets/disease_detection.jpg";
+import deficiencyImg from "../assets/deficiency.jpg";
+import weatherImg from "../assets/weather_forecast.jpg";
+
 const Home = () => {
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-green-50 to-green-100">
@@ -36,13 +41,13 @@ const Home = () => {
         </div>
 
         <div className="md:w-1/2 mt-10 md:mt-0">
-         <img
-  src="/src/assets/bg.jpg"
-  alt="farming"
- className="w-full h-[420px] object-cover object-center
-           rounded-2xl shadow-2xl
-           hover:scale-105 transition duration-500"
-/>
+          <img
+            src="/src/assets/bg.jpg"
+            alt="farming"
+            className="w-full h-[420px] object-cover object-center
+                       rounded-2xl shadow-2xl
+                       hover:scale-105 transition duration-500"
+          />
         </div>
       </section>
 
@@ -53,22 +58,63 @@ const Home = () => {
         </h2>
 
         <div className="grid md:grid-cols-4 gap-8">
-          {[
-            { title: "Crop Prediction", desc: "AI-based crop suggestions based on soil and climate" },
-            { title: "Disease Detection", desc: "Upload plant image to detect diseases" },
-            { title: "Deficiency Analysis", desc: "Find nutrient deficiencies in crops" },
-            { title: "Weather Forecast", desc: "Weather-based smart farming advice" },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="p-6 bg-green-50 rounded-xl shadow hover:shadow-xl hover:-translate-y-2 transition duration-300"
-            >
-              <h3 className="text-xl font-semibold text-green-800 mb-2">
-                {item.title}
-              </h3>
-              <p className="text-gray-600">{item.desc}</p>
-            </div>
-          ))}
+
+          <div className="p-6 bg-green-50 rounded-xl shadow hover:shadow-xl hover:-translate-y-2 transition duration-300">
+            <img
+              src={cropImg}
+              alt="Crop Prediction"
+              className="w-full h-40 object-cover rounded-lg mb-4"
+            />
+            <h3 className="text-xl font-semibold text-green-800 mb-2">
+              Crop Prediction
+            </h3>
+            <p className="text-gray-600">
+              AI-based crop suggestions based on soil and climate
+            </p>
+          </div>
+
+          <div className="p-6 bg-green-50 rounded-xl shadow hover:shadow-xl hover:-translate-y-2 transition duration-300">
+            <img
+              src={diseaseImg}
+              alt="Disease Detection"
+              className="w-full h-40 object-cover rounded-lg mb-4"
+            />
+            <h3 className="text-xl font-semibold text-green-800 mb-2">
+              Disease Detection
+            </h3>
+            <p className="text-gray-600">
+              Upload plant image to detect diseases
+            </p>
+          </div>
+
+          <div className="p-6 bg-green-50 rounded-xl shadow hover:shadow-xl hover:-translate-y-2 transition duration-300">
+            <img
+              src={deficiencyImg}
+              alt="Deficiency Analysis"
+              className="w-full h-40 object-cover rounded-lg mb-4"
+            />
+            <h3 className="text-xl font-semibold text-green-800 mb-2">
+              Deficiency Analysis
+            </h3>
+            <p className="text-gray-600">
+              Find nutrient deficiencies in crops
+            </p>
+          </div>
+
+          <div className="p-6 bg-green-50 rounded-xl shadow hover:shadow-xl hover:-translate-y-2 transition duration-300">
+            <img
+              src={weatherImg}
+              alt="Weather Forecast"
+              className="w-full h-40 object-cover rounded-lg mb-4"
+            />
+            <h3 className="text-xl font-semibold text-green-800 mb-2">
+              Weather Forecast
+            </h3>
+            <p className="text-gray-600">
+              Weather-based smart farming advice
+            </p>
+          </div>
+
         </div>
       </section>
 
