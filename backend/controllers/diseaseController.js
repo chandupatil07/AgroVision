@@ -12,7 +12,8 @@ export const predictDisease = async (req, res) => {
     formData.append("image", fs.createReadStream(req.file.path));
 
     const response = await axios.post(
-      "http://127.0.0.1:6000/predict",
+      // "http://127.0.0.1:6000/predict",
+      "http://127.0.0.1:6000/disease/predict", //this new changed 
       formData,
       { headers: formData.getHeaders() }
     );

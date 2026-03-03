@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import dashboardBg from "../assets/dashboard_background.jpg";
+
+// NEW CARD IMAGES
+import cropCard from "../assets/crop_pred_card.jpg";
+import diseaseCard from "../assets/disease_detection_card.avif";
+import weatherCard from "../assets/weather_card_bg.png";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -56,106 +62,121 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100">
+    <div
+      className="min-h-screen bg-cover bg-center relative"
+      style={{ backgroundImage: `url(${dashboardBg})` }}
+    >
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
-      <div className="max-w-7xl mx-auto px-8 py-10 space-y-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 space-y-12">
 
-        {/* Welcome + Profile */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col md:flex-row md:items-center md:justify-between">
+        {/* Welcome Section */}
+        <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl shadow-2xl p-10 flex flex-col lg:flex-row justify-between items-center gap-8">
 
           <div>
-            <h2 className="text-3xl font-bold text-green-800">
+            <h2 className="text-4xl font-bold text-green-800">
               Welcome, {user?.name || "Farmer"} 👨‍🌾
             </h2>
-            <p className="text-gray-600 mt-2">
-              Smart decisions based on today’s weather and crop conditions.
+            <p className="text-gray-600 mt-3 text-lg">
+              Smart AI-powered decisions based on today’s weather and crop conditions.
             </p>
           </div>
 
-          {/* Profile Card */}
-          <div className="flex items-center gap-4 mt-6 md:mt-0">
-            <div className="w-12 h-12 rounded-full bg-green-700 text-white flex items-center justify-center text-lg font-bold shadow">
+          <div className="flex items-center gap-5">
+            <div className="w-14 h-14 rounded-full bg-green-700 text-white flex items-center justify-center text-xl font-bold shadow-lg">
               {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
             </div>
+
             <div>
-              <p className="font-semibold text-gray-800">{user?.name}</p>
+              <p className="font-semibold text-gray-800 text-lg">{user?.name}</p>
               <p className="text-sm text-gray-500">Farmer Account</p>
             </div>
+
             <button
               onClick={handleLogout}
-              className="ml-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 transition"
+              className="ml-4 bg-red-600 text-white px-5 py-2 rounded-xl hover:bg-red-500 transition duration-300 shadow-lg"
             >
               Logout
             </button>
           </div>
-
         </div>
 
-        {/* Weather Cards */}
-        {weather && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-            <div className="bg-blue-100 p-6 rounded-2xl shadow-md">
-              <h3 className="text-lg font-semibold text-blue-700 mb-2">☁ Weather</h3>
-              <p className="text-gray-700">{weather.condition}, {weather.temp}°C</p>
-              <p className="text-gray-700">Humidity: {weather.humidity}%</p>
-            </div>
-
-            <div className="bg-yellow-100 p-6 rounded-2xl shadow-md">
-              <h3 className="text-lg font-semibold text-yellow-700 mb-2">🧪 Fertilizer</h3>
-              <p className="text-gray-700">Apply Nitrogen fertilizer tomorrow</p>
-            </div>
-
-            <div className="bg-red-100 p-6 rounded-2xl shadow-md">
-              <h3 className="text-lg font-semibold text-red-700 mb-2">🦠 Disease Risk</h3>
-              <p className="text-gray-700">Medium (due to humidity)</p>
-            </div>
-
-          </div>
-        )}
-
-        {/* Smart Decisions */}
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h3 className="text-2xl font-bold text-green-800 mb-6">
-            📊 Smart Farming Decisions (Today)
-          </h3>
-
-          <ul className="space-y-3 text-gray-700">
-            {decisions.map((item, index) => (
-              <li key={index} className="flex items-center gap-2">
-                <span className="text-green-600">✔</span> {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Services */}
+        {/* SERVICES SECTION - IMPROVED */}
         <div>
-          <h3 className="text-2xl font-bold text-green-800 mb-6">
-            🚀 Services
+          <h3 className="text-3xl font-bold text-white mb-10 text-center">
+            🚀 Explore Services
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
-            <div 
+            {/* Crop Prediction Card */}
+            <div
               onClick={() => navigate("/crop-prediction")}
-              className="cursor-pointer bg-white p-8 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition"
+              className="group relative cursor-pointer rounded-3xl overflow-hidden shadow-2xl transform transition duration-500 hover:-translate-y-4 hover:scale-105"
             >
-              🌾 Crop Prediction
+              <img
+                src={cropCard}
+                alt="Crop Prediction"
+                className="w-full h-80 object-cover"
+              />
+
+              <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-60 transition duration-500"></div>
+
+              <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6 text-white">
+                <h4 className="text-2xl font-bold mb-3 tracking-wide">
+                  🌾 Crop Prediction
+                </h4>
+                <p className="opacity-90 text-sm">
+                  Get AI-based crop yield prediction using soil & weather data.
+                </p>
+              </div>
             </div>
 
-            <div 
+            {/* Disease Detection Card */}
+            <div
               onClick={() => navigate("/disease-detection")}
-              className="cursor-pointer bg-white p-8 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition"
+              className="group relative cursor-pointer rounded-3xl overflow-hidden shadow-2xl transform transition duration-500 hover:-translate-y-4 hover:scale-105"
             >
-              🦠 Disease Detection
+              <img
+                src={diseaseCard}
+                alt="Disease Detection"
+                className="w-full h-80 object-cover"
+              />
+
+              <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-60 transition duration-500"></div>
+
+              <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6 text-white">
+                <h4 className="text-2xl font-bold mb-3 tracking-wide">
+                  🦠 Disease Detection
+                </h4>
+                <p className="opacity-90 text-sm">
+                  Upload crop images to detect plant diseases instantly.
+                </p>
+              </div>
             </div>
 
-            <div 
+            {/* Weather Forecast Card */}
+            <div
               onClick={() => navigate("/weather")}
-              className="cursor-pointer bg-white p-8 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition"
+              className="group relative cursor-pointer rounded-3xl overflow-hidden shadow-2xl transform transition duration-500 hover:-translate-y-4 hover:scale-105"
             >
-              ☁ Weather Forecast
+              <img
+                src={weatherCard}
+                alt="Weather Forecast"
+                className="w-full h-80 object-cover"
+              />
+
+              <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-60 transition duration-500"></div>
+
+              <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6 text-white">
+                <h4 className="text-2xl font-bold mb-3 tracking-wide">
+                  ☁ Weather Forecast
+                </h4>
+                <p className="opacity-90 text-sm">
+                  Check real-time weather updates & farming recommendations.
+                </p>
+              </div>
             </div>
 
           </div>
