@@ -17,7 +17,13 @@ export const predictCrop = async (req, res) => {
       rainfall: 200,
     };
 
-    const ml = await axios.post("http://127.0.0.1:8000/predict", {
+    // const ml = await axios.post("http://127.0.0.1:8000/predict", {
+    //   ...soil,
+    //   temperature: weather.temperature,
+    //   humidity: weather.humidity,
+    // });   //old api backend calling
+
+      const ml = await axios.post("http://127.0.0.1:10000/crop/predict", {
       ...soil,
       temperature: weather.temperature,
       humidity: weather.humidity,

@@ -3,3 +3,13 @@ opencv-python
 numpy
 flask
 pillow
+
+
+
+flask-cors
+
+opencv-python-headless
+
+pandas
+joblib
+gunicorn
