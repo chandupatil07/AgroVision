@@ -3,7 +3,7 @@ opencv-python
 numpy
 flask
 pillow
-
+scikit-learn
 
 
 flask-cors
