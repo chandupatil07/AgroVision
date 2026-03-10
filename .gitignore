@@ -53,9 +53,9 @@ env/
 # =========================
 # ML Model Large Files (DO NOT PUSH)
 # =========================
-*.h5
-*.pkl
-*.joblib
+# *.h5
+# *.pkl
+# *.joblib
 *.pt
 *.onnx
 
@@ -91,8 +91,8 @@ ml_models/utils/__pycache__/
 # =========================
 # Ignore trained model directory completely (optional but recommended)
 # =========================
-ml_models/model/*.pkl
-ml_models/model/*.h5
+# ml_models/model/*.pkl
+# ml_models/model/*.h5
 
 # =========================
 # Ignore dataset folder completely (optional)

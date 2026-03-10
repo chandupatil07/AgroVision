@@ -20,7 +20,7 @@
 
         const response = await axios.post(
         // "http://127.0.0.1:6000/predict",
-        "http://127.0.0.1:10000/disease/predict", //this new changed 
+ "https://agrovision-ml-models-backend.onrender.com/disease/predict",//this new changed 
         formData,
         { headers: formData.getHeaders() }
       )
