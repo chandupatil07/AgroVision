@@ -17,13 +17,16 @@ export const predictDisease = async (req, res) => {
     //   formData,
     //   { headers: formData.getHeaders() }
     // ); //api backend is calling old
-
- const response = await axios.post(
-  "https://agrovision-ml-models.onrender.com/disease/predict",
-  formData,
-  { headers: formData.getHeaders() }
+const response = await axios.post(
+ "https://agrovision-ml-models.onrender.com/disease/predict",
+ formData,
+ {
+   headers: formData.getHeaders(),
+   timeout: 300000
+ }
 );
 
+fs.unlinkSync(req.file.path);
     return res.json(response.data);
 
   } catch (error) {

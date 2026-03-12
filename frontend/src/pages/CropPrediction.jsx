@@ -23,12 +23,11 @@ function CropPrediction() {
           "http://localhost:5000/api/crop/predict",
           // "https://agrovision-backend-ab1p.onrender.com/api/crop/predict",
           { lat, lon }
-        );
+        ); //old api 
 
-//         const res = await axios.post(
-// "https://agrovision-backend-ab1p.onrender.com/api/crop/predict",
-// { lat, lon },
-// { timeout: 60000 } // wait 60 seconds
+// const res = await axios.post(
+//   "https://agrovision-ml-models-backend.onrender.com/api/crop/predict",
+//   { lat, lon }
 // );
 
         setResult(res.data);
