@@ -11,21 +11,21 @@ export const predictDisease = async (req, res) => {
     const formData = new FormData();
     formData.append("image", fs.createReadStream(req.file.path));
 
-    // const response = await axios.post(
-    //   // "http://127.0.0.1:6000/predict",
-    //   "http://127.0.0.1:6000/disease/predict", //this new changed 
-    //   formData,
-    //   { headers: formData.getHeaders() }
-    // ); //api backend is calling old
-
     const response = await axios.post(
-      "https://agrovision-ml-models-backend.onrender.com/disease/predict",
+      // "http://127.0.0.1:6000/predict",
+      "http://127.0.0.1:10000/disease/predict", //this new changed 
       formData,
-      {
-        headers: formData.getHeaders(),
-        timeout: 60000
-      }
-    );
+      { headers: formData.getHeaders() }
+    ); //api backend is calling old
+
+    // const response = await axios.post(
+    //   "https://agrovision-ml-models-backend.onrender.com/disease/predict",
+    //   formData,
+    //   {
+    //     headers: formData.getHeaders(),
+    //     timeout: 60000
+    //   }
+    // );
 
     return res.json(response.data);
 
