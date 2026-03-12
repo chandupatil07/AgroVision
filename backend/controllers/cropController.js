@@ -17,17 +17,22 @@ export const predictCrop = async (req, res) => {
       rainfall: 200,
     };
 
-    // const ml = await axios.post("http://127.0.0.1:10000/predict", {
-    //   ...soil,
-    //   temperature: weather.temperature,
-    //   humidity: weather.humidity,
-    // });   //old api backend calling
+    //old api backend calling
 
- const ml = await axios.post("http://127.0.0.1:10000/crop/predict", {
-  ...soil,
-  temperature: weather.temperature,
-  humidity: weather.humidity,
-});
+//  const ml = await axios.post("http://127.0.0.1:10000/crop/predict", {
+//   ...soil,
+//   temperature: weather.temperature,
+//   humidity: weather.humidity,
+// });
+
+const ml = await axios.post(
+  "https://agrovision-ml-models.onrender.com/crop/predict",
+  {
+    ...soil,
+    temperature: weather.temperature,
+    humidity: weather.humidity,
+  }
+);
     res.json({
       crop: ml.data.crop,
       reason: ml.data.reason,
