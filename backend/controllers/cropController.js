@@ -23,19 +23,24 @@ export const predictCrop = async (req, res) => {
     //   humidity: weather.humidity,
     // });   //old api backend calling
 
-      const ml = await axios.post("https://agrovision-ml-models-backend.onrender.com/crop/predict", {
-      ...soil,
-      temperature: weather.temperature,
-      humidity: weather.humidity,
-    });
-
+    const ml = await axios.post(
+      "https://agrovision-ml-models-backend.onrender.com/crop/predict",
+      {
+        ...soil,
+        temperature: weather.main.temp - 273.15,
+        humidity: weather.main.humidity,
+      },
+      {
+        timeout: 60000
+      }
+    );
     res.json({
       crop: ml.data.crop,
       reason: ml.data.reason,
       weather,
     });
   } catch (err) {
-    console.log(err.message);
+    console.log("ML ERROR:", err.response?.data || err.message);
     res.status(500).json({ error: "Prediction failed" });
   }
 };

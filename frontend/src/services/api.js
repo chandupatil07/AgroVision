@@ -6,6 +6,8 @@ const API = axios.create({
 });
 
 
+
+
 // Register 
 export const registerUser = (data) => API.post("/auth/register", data);
 // Login API

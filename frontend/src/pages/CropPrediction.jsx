@@ -19,10 +19,17 @@ function CropPrediction() {
         const lat = pos.coords.latitude;
         const lon = pos.coords.longitude;
 
+        // const res = await axios.post(
+        //   // "http://localhost:5000/api/crop/predict",
+        //   "https://agrovision-backend-ab1p.onrender.com/api/crop/predict",
+        //   { lat, lon }
+        // );
+
         const res = await axios.post(
-          "http://localhost:5000/api/crop/predict",
-          { lat, lon }
-        );
+"https://agrovision-backend-ab1p.onrender.com/api/crop/predict",
+{ lat, lon },
+{ timeout: 60000 } // wait 60 seconds
+);
 
         setResult(res.data);
       } catch (err) {
@@ -87,14 +94,14 @@ function CropPrediction() {
                 <div className="bg-yellow-50 p-4 rounded-lg shadow">
                   🌡 Temperature:{" "}
                   <span className="font-semibold">
-                    {result.weather.temperature} °C
+                    {result.weather.main.temp - 273.15} °C
                   </span>
                 </div>
 
                 <div className="bg-purple-50 p-4 rounded-lg shadow">
                   💧 Humidity:{" "}
                   <span className="font-semibold">
-                    {result.weather.humidity}%
+                  {result.weather.main.humidity}%
                   </span>
                 </div>
               </div>

@@ -26,6 +26,9 @@ MODEL_PATH = os.path.join(BASE_DIR, "model.h5")
 disease_model = tf.keras.models.load_model(MODEL_PATH)
 
 CLASS_NAMES = ["Healthy", "Leaf Blight", "Powdery Mildew", "Rust"]
+@app.route("/")
+def home():
+    return "AgroVision ML Server Running"
 
 # =========================
 # Crop Prediction API
