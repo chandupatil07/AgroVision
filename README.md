@@ -33,22 +33,20 @@ ML Server (Flask + TensorFlow - Render)
 ## 📸 Project Screenshots
 
 ### 🏠 Home Page
+<img width="1886" height="910" alt="agrovision" src="https://github.com/user-attachments/assets/dea084aa-48a3-46e3-a167-09a85cdb0a22" 
 
-
----
-
-### 🌾 Crop Prediction Page
-👉 ADD IMAGE HERE (Crop Prediction Screenshot)
 
 ---
 
 ### 🌿 Disease Detection Page
-👉 ADD IMAGE HERE (Disease Detection Screenshot)
+<img width="1919" height="971" alt="Screenshot 2026-03-02 030558" src="https://github.com/user-attachments/assets/c08c12c1-0fdc-411f-84d3-92c2fb7e107f" />
+
 
 ---
 
 ### 🌦️ Weather Page
-👉 ADD IMAGE HERE (Weather Page Screenshot)
+<img width="1892" height="966" alt="image" src="https://github.com/user-attachments/assets/80b5fe96-f4cd-47ee-bb71-b13fe14cee31" />
+
 
 ---
 
@@ -131,5 +129,98 @@ Used for improving crop prediction accuracy
 ## ⚙️ Installation & Setup (Local)
 
 ### 1️⃣ Clone Repository
+git clone https://github.com/yourusername/agrovision.git
+
+cd agrovision
+
+
+---
+
+### 2️⃣ Backend Setup
+cd backend
+npm install
+npm start
+
+
+---
+
+### 3️⃣ Frontend Setup
+cd frontend
+npm install
+npm start
+
+
+---
+
+### 4️⃣ ML Model Setup
+cd ml_models
+pip install -r requirements.txt
+python app.py
+
+
+
+---
+
+## 🔗 API Endpoints
+
+### Crop Prediction
+POST /api/crop/predict
+
+
+---
+
+### Disease Detection
+POST /api/disease/predict
+
+
+---
+
+## 🌍 Live Project Links
+
+Frontend:https://agrovision-self.vercel.app/
+
+
+Backend: https://agrovision-backend-ab1p.onrender.com
+
+
+
+
+---
+
+## 📌 Challenges Faced
+
+- Deployment of ML model on cloud
+- Slow response due to free hosting (Render cold start)
+- Handling image processing efficiently
+- Connecting frontend, backend, and ML server
+
+---
+
+## 🚀 Future Improvements
+
+- Faster predictions using TensorFlow Lite
+- Mobile application version
+- More crop & disease datasets
+- Better UI/UX improvements
+
+---
+
+## 👨‍💻 Author
+
+**Chandrashekhar Patil**  
+Computer Science Engineering Student  
+Developer of AgroVision Project
+
+---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub!
+
+---
+
+
+
+
 
 
