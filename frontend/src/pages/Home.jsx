@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import heroImg from "../assets/bg.jpg";
 import cropImg from "../assets/crop_prediction.jpg";
 import diseaseImg from "../assets/disease_detection.jpg";
 import deficiencyImg from "../assets/deficiency.jpg";
@@ -42,12 +43,12 @@ const Home = () => {
 
         <div className="md:w-1/2 mt-10 md:mt-0">
           <img
-            src="/src/assets/bg.jpg"
-            alt="farming"
-            className="w-full h-[420px] object-cover object-center
-                       rounded-2xl shadow-2xl
-                       hover:scale-105 transition duration-500"
-          />
+  src={heroImg}
+  alt="farming"
+  className="w-full h-[420px] object-cover object-center
+             rounded-2xl shadow-2xl
+             hover:scale-105 transition duration-500"
+/>
         </div>
       </section>
 
